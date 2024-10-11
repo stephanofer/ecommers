@@ -1,0 +1,56 @@
+---
+import fetchApi from "@/lib/strapi";
+import type { Seo } from '@/lib/types'
+
+let metaDescription = "Tienda Virtual";
+let metaTitle = "Tienda Virtual";
+
+const seoData = await fetchApi<Seo>({
+    endpoint: 'home', 
+    wrappedByKey: 'data', 
+    query: {
+      "populate": "seo"
+    },
+    extractField: "seo"
+});
+
+
+if (seoData) {
+    metaDescription = seoData.metaDescription || metaDescription;
+    metaTitle = seoData.metaTitle || metaTitle;
+}
+
+export const prerender = false
+---
+
+<meta charset="UTF-8" />
+
+<meta name="description" content={metaDescription}>
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+<meta name="generator" content={Astro.generator} />
+<meta
+  name="keywords"
+  content="desarrollador web, React, NestJS, Astro, Angular"
+/>
+<meta name="author" content="Stephano Fernandez" />
+<meta name="generator" content={Astro.generator} />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Stephano Fernandez | Portafolio " />
+<meta
+  property="og:description"
+  content={metaDescription}
+/>
+<meta property="twitter:title" content="Stephano Fernandez | Portafolio" />
+<meta
+  property="twitter:description"
+  content={metaDescription}
+/>
+
+<title>{metaTitle}</title>
+<link rel="icon" type="image/svg+xml" href="/stephanofer-porfolio/favicon.svg" />
