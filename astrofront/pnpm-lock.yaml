@@ -29,6 +29,9 @@ importers:
       astro-icon:
         specifier: ^1.1.1
         version: 1.1.1
+      axios:
+        specifier: ^1.7.7
+        version: 1.7.7
       preact:
         specifier: ^10.24.2
         version: 10.24.2

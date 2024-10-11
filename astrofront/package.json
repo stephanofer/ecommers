@@ -17,6 +17,7 @@
     "@tanstack/react-query-devtools": "^5.59.11",
     "astro": "^5.0.0-beta.4",
     "astro-icon": "^1.1.1",
+    "axios": "^1.7.7",
     "preact": "^10.24.2",
     "typescript": "^5.6.3"
   }
