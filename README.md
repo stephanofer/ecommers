@@ -6,6 +6,7 @@
 ```js
 const technologies = [
   { name: "Astro"},
+  { name: "Preact"},
   { name: "Strapi"},
   { name: "PostgreSQL"},
 ]
