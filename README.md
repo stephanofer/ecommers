@@ -1,6 +1,6 @@
 # 🛒 Boilerplate All Ecommers
 
-> **IMPORTANTE**: Currently in development
+> **IMPORTANT**: Currently in development
 
 ## 💻 Initial Stack
 ```js
