@@ -1,11 +1,9 @@
 # 🛒 Boilerplate All Ecommers
 
-## 💻 Initial Stack
-```js
-
 > **IMPORTANTE**: Currently in development
 
-
+## 💻 Initial Stack
+```js
 const technologies = [
   { name: "Astro"},
   { name: "Strapi"},
