@@ -1,33 +1,54 @@
 ---
 import { HomePageSEO } from "@/lib/queries";
+import {STRAPI_URL} from 'astro:env/server'
 
-const {favicon, keywords, metaDescription, metaImage, metaTitle} = await HomePageSEO();
 
-// console.log(favicon, keywords, metaDescription, metaImage.url, metaTitle);
 
+const {seo, favicon} = await HomePageSEO();
 export const prerender = false
+
+
 ---
 
 <meta charset="UTF-8" />
-<meta name="description" content={metaDescription}>
 <meta name="robots" content="instrucción1,instrucción2">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="generator" content={Astro.generator} />
 
+
+
+<meta name="title" content={seo.metaTitle}>
+<meta name="description" content={seo.metaDescription}>
 <meta
   name="keywords"
-  content={keywords}
+  content={seo.keywords}
 />
+<!-- <link rel="canonical" href="https://ejemplo.com"> -->
+
+
+
+
 
 
 <meta property="og:type" content="website" />
-<meta property="og:title" content={metaTitle} />
-<meta
-  property="og:description"
-  content={metaDescription}
-/>
-<meta property="og:image" content={metaImage.url} />
+<!-- <meta property="og:url" content={social.url} /> -->
+<!-- <meta property="og:site_name" content={social.siteName} /> -->
+<meta property="og:locale" content="es" />
+
+
+
+
+{seo.metaSocial.map((social) => (
+  <>
+    <meta property={`${social.socialNetwork}:title`} content={social.title} />
+    <meta property={`${social.socialNetwork}:description`} content={social.description} />
+    <meta property={`${social.socialNetwork}:image`} content={`${STRAPI_URL}${social.image.url}`} />
+  </>
+))}
+
+
 <!-- <meta property="og:url" content="https://example.com" /> -->
 <link rel="icon" type="image/svg+xml" href={favicon.url}/>
 
-<title>{metaTitle}</title>
+<title>{seo.metaTitle}</title>
+

@@ -1,14 +1,24 @@
-export type Seo = {
-    metaTitle: string,
-    metaDescription: string,
-    keywords: string,
-    metaImage: {
-        url: string
-    },
-}
-
-export type Favicon = {
+type Image = {
     url: string
 }
 
-export type HomeSEO = (Seo & {favicon: Favicon})
+type MetaSocial= {
+    socialNetwork: string,
+    title: string,
+    description: string,
+    image: Image
+}
+
+export type SEO = {
+    metaTitle: string,
+    metaDescription: string,
+    keywords: string,
+    metaImage: Image,
+    metaSocial: MetaSocial[]
+}
+
+export type FetchHomeSEO = {
+    seo: SEO,
+    favicon: Image,
+}
+

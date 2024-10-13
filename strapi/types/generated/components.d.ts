@@ -5,6 +5,7 @@ export interface SharedSeo extends Struct.ComponentSchema {
   info: {
     displayName: 'seo';
     icon: 'search';
+    description: '';
   };
   attributes: {
     metaTitle: Schema.Attribute.String &
@@ -33,9 +34,10 @@ export interface SharedMetaSocial extends Struct.ComponentSchema {
   info: {
     displayName: 'metaSocial';
     icon: 'project-diagram';
+    description: '';
   };
   attributes: {
-    socialNetwork: Schema.Attribute.Enumeration<['Facebook', 'Twitter']> &
+    socialNetwork: Schema.Attribute.Enumeration<['og', 'twitter']> &
       Schema.Attribute.Required;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
