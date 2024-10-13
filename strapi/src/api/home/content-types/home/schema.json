@@ -24,6 +24,12 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "navbar": {
+      "type": "component",
+      "repeatable": false,
+      "component": "global.navbar",
+      "required": true
     }
   }
 }

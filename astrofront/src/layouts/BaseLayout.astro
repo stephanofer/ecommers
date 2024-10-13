@@ -1,5 +1,8 @@
 ---
+import SiteHeader from '@/components/layout/SiteHeader.astro'
 import Seo from '@/components/SEO.astro'
+
+import "@/styles/global.css"
 ---
 
 <!doctype html>
@@ -8,6 +11,7 @@ import Seo from '@/components/SEO.astro'
 		<Seo/>
 	</head>
 	<body>
+		<SiteHeader />
 		<slot />
 	</body>
 </html>

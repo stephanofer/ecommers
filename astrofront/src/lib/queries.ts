@@ -1,6 +1,6 @@
 import fetchApi from "./strapi";
 import type { FetchHomeSEO } from "./types";
-import {STRAPI_URL} from 'astro:env/server'
+import { completeRouteImage } from "./utils";
 
 export async function HomePageSEO(): Promise<FetchHomeSEO> {
   const seoData = await fetchApi<FetchHomeSEO>({
@@ -15,8 +15,6 @@ export async function HomePageSEO(): Promise<FetchHomeSEO> {
     },
   });
 
-  // console.log(seoData);
-
 
   if (seoData){
     return {
@@ -25,12 +23,12 @@ export async function HomePageSEO(): Promise<FetchHomeSEO> {
           metaDescription: seoData.seo.metaDescription,
           keywords: seoData.seo.keywords.split('\n').join(', '),
           metaImage: {
-              url: `${STRAPI_URL}${seoData.seo.metaImage.url}`
+              url: completeRouteImage(seoData.seo.metaImage.url) 
           },
           metaSocial: seoData.seo.metaSocial,
         },
         favicon: {
-            url: `${STRAPI_URL}${seoData.favicon.url}`
+            url: completeRouteImage(seoData.favicon.url)
         }
       }
   }

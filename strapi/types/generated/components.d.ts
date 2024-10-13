@@ -53,11 +53,23 @@ export interface SharedMetaSocial extends Struct.ComponentSchema {
   };
 }
 
+export interface GlobalNavbar extends Struct.ComponentSchema {
+  collectionName: 'components_global_navbars';
+  info: {
+    displayName: 'Navbar';
+    description: '';
+  };
+  attributes: {
+    logo: Schema.Attribute.Relation<'oneToOne', 'api::logo.logo'>;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'shared.seo': SharedSeo;
       'shared.meta-social': SharedMetaSocial;
+      'global.navbar': GlobalNavbar;
     }
   }
 }

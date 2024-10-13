@@ -1,0 +1,39 @@
+---
+import fetchApi from '@/lib/strapi'
+import type { FetchNavbar } from '@/lib/types'
+import { completeRouteImage } from '@/lib/utils'
+import {Image} from 'astro:assets'
+import {STRAPI_URL} from 'astro:env/server'
+
+const navbarItems = await fetchApi<FetchNavbar>({
+    endpoint: 'home',
+    wrappedByKey: "data",
+    query: {
+     "fields[0]": "id",
+     "fields[1]": "documentId",
+     "populate[navbar][populate][logo][fields][0]": "company",
+     "populate[navbar][populate][logo][populate][image][fields][0]": "url"
+    }
+})
+
+console.log(navbarItems);
+
+---
+
+<nav aria-label="Navegacion de la pagina">
+  <div>
+     <img src={completeRouteImage(navbarItems?.navbar.logo.image.url || "")} alt={navbarItems?.navbar.logo.company}/>
+  </div>
+  <h1>Hola mundo</h1>
+</nav>
+
+<style>
+  h1 {
+    color: white;
+  }
+
+  img{
+    width: 100px;
+    height: auto;
+  }
+</style>
