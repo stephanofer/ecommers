@@ -22,3 +22,13 @@ export type FetchHomeSEO = {
     favicon: Image,
 }
 
+type Logo = {
+    company: string,
+    image: Image
+}
+
+export type FetchNavbar = {
+    navbar: {
+        logo: Logo
+    }
+}
