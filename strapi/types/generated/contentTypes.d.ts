@@ -13,6 +13,7 @@ export interface ApiHomeHome extends Struct.SingleTypeSchema {
   };
   attributes: {
     seo: Schema.Attribute.Component<'shared.seo', false>;
+    favicon: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
