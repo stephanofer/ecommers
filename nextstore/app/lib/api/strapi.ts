@@ -5,7 +5,6 @@ interface Props {
   query?: Record<string, string>;
   wrappedByKey?: string;
   wrappedByList?: boolean;
-  // extractField?: string;
 }
 
 export default async function fetchApi<T>({
@@ -13,12 +12,13 @@ export default async function fetchApi<T>({
   query,
   wrappedByKey,
   wrappedByList,
-  // extractField,
 }: Props): Promise<T | null> {
 
   if (endpoint.startsWith("/")) {
     endpoint = endpoint.slice(1);
   }
+
+
   const url = new URL(`${process.env.STRAPI_URL}/api/${endpoint}`);
   if (query) {
     Object.entries(query).forEach(([key, value]) => {
@@ -27,9 +27,9 @@ export default async function fetchApi<T>({
   }
 
   try {
-    const { data } = await axios(url.toString(), {
+    const { data } = await axios.get(url.toString(), {
       headers: {
-        Authorization: `Bearer ${process.env.STRAPI_TOKEN   }`,
+        Authorization: `Bearer ${process.env.STRAPI_TOKEN}`,
       },
     });
 
@@ -41,9 +41,6 @@ export default async function fetchApi<T>({
     if (wrappedByList && Array.isArray(result)) {
       result = result[0];
     }
-    // if (extractField && result[extractField]) {
-    //   result = result[extractField];
-    // }
     return result as T;
   } catch (error) {
     console.error("Error fetching data from Strapi:", (error as Error).message);
