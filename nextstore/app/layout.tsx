@@ -1,15 +1,18 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import TanstackProvider from "@/providers/TanstackProvider";
-import { HomePageSEO } from "./lib/get-homepage";
+import { getHomePageSEO } from "./lib/api/getHomePageSEO";
 import { completeRouteImage } from "./lib/utils";
+import SiteNavbar from "@/app/components/layout/SiteHeader";
+
 
 export async function generateMetadata(): Promise<Metadata> {
  
-  const {seo, favicon} = await HomePageSEO();
+  const {seo, favicon} = await getHomePageSEO();
+
 
   const openGraph = seo.metaSocial.find((metaSocial) => metaSocial.socialNetwork === "og")
-  const twitter = seo.metaSocial.find((metaSocial) => metaSocial.socialNetwork === "og")
+  const twitter = seo.metaSocial.find((metaSocial) => metaSocial.socialNetwork === "twitter")
 
 
  
@@ -18,7 +21,9 @@ export async function generateMetadata(): Promise<Metadata> {
     description: seo.metaDescription,
     keywords: seo.keywords,
     icons: {
-      icon: favicon ? favicon.url: ""
+      icon: {
+        url: favicon.url
+      }
     },
     openGraph: {
       type: "website",
@@ -28,30 +33,30 @@ export async function generateMetadata(): Promise<Metadata> {
       images: {
         url: openGraph ? completeRouteImage(openGraph.image.url) : ""
       }
-      
     },
     twitter: {
-      title: openGraph ? openGraph.title : "Tienda Virtual",
-      description: openGraph ? openGraph.description : "Tienda Virtual",
+      title: twitter ? twitter.title : "Tienda Virtual",
+      description: twitter ? twitter.description : "Tienda Virtual",
       images: {
-        url: openGraph ? completeRouteImage(openGraph.image.url) : ""
+        url: twitter ? completeRouteImage(twitter.image.url) : ""
       }
     }
   }
 }
- 
-
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
   return (
     <html lang="en">
       <body
       >
         <TanstackProvider>
+        <SiteNavbar />
           <div>{children}</div>
         </TanstackProvider>
       </body>
