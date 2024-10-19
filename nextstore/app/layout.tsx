@@ -4,6 +4,7 @@ import TanstackProvider from "@/providers/TanstackProvider";
 import { getHomePageSEO } from "./lib/api/getHomePageSEO";
 import { completeRouteImage } from "./lib/utils";
 import SiteNavbar from "@/app/components/layout/SiteHeader";
+import Announce from "./components/layout/Announce";
 
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -52,12 +53,14 @@ export default function RootLayout({
 
 
   return (
-    <html lang="en">
+    <html lang="en" className="h-full">
       <body
+      className="h-full"
       >
         <TanstackProvider>
-        <SiteNavbar />
-          <div>{children}</div>
+          <Announce />
+         <SiteNavbar />
+          {children}
         </TanstackProvider>
       </body>
     </html>
